@@ -13,16 +13,3 @@ const router = (
 )
 
 ReactDOM.render(router, document.querySelector('main'));
-
-
-
-// ReactDOM.render(
-//     <Welcome />,
-//     document.querySelector('main')
-// );
-
-// function HelloWorld() {
-//     return (
-//         <div>Hello, World!</div>
-//     );
-// }
