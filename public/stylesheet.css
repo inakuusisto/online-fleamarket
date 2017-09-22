@@ -21,11 +21,32 @@ main {
     grid-column: 2;
     display: flex;
     flex-direction: column;
-    /*justify-content: center;*/
     align-items: center;
     margin-top: 60px;
 }
 
 #welcome-text {
     margin-top: 50px;
+    margin-bottom: 15px;
+}
+
+#reg-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.reg-input {
+    width: 200px;
+    height: 30px;
+    border-radius: 10px;
+    padding-left: 10px;
+    margin-bottom: 8px;
+}
+
+.reg-button {
+    margin-left: 65px;
+    margin-bottom: 10px;
+    width: 70px;
+    height: 50px;
 }
