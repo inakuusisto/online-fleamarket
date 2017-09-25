@@ -1,6 +1,6 @@
 import React from 'react';
 import Register from './register';
-import Login from './login';
+import { Link } from 'react-router';
 
 export default function Welcome(props) {
 
@@ -8,7 +8,7 @@ export default function Welcome(props) {
         <div id='welcome-container'>
             <h2>Welcome to ClothesCircle!</h2>
             <p id='welcome-text'>Ready to find your next favourite piece of clothing or make more space to your wardrobe?</p>
-            {props.children}
+            <Link to='/register'>Register</Link>
         </div>
     );
 }
