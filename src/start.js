@@ -6,6 +6,8 @@ import Register from './register';
 import Login from './login';
 import Home from './home';
 import LoggedInHome from './loggedInHome';
+import AddNewItem from './addNewItem';
+import Profile from './profile';
 
 
 if (location.pathname == '/home') {
@@ -25,6 +27,8 @@ if (location.pathname == '/home') {
     const router = (
         <Router history={browserHistory}>
             <Route path='/' component={LoggedInHome} />
+            <Route path='/profile' component={Profile} />
+            <Route path='/newItem' component={AddNewItem} />
         </Router>
     );
 

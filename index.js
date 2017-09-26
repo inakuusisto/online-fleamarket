@@ -100,9 +100,26 @@ app.post('/login', function(req, res) {
 
 
 
-app.get('/', function(req, res){
+app.get('/profile', function(req, res) {
+    functions.getUserData(req.session.user.email).then(function(results) {
+        res.json(results.rows[0]);
+    }).catch(function(err) {
+        console.log(err);
+    });
+});
+
+
+app.get('*', function(req, res) {
+    if(!req.session.user) {
+        res.redirect('/home');
+    }
     res.sendFile(__dirname + '/index.html');
 });
+
+
+// app.get('/', function(req, res){
+//     res.sendFile(__dirname + '/index.html');
+// });
 
 
 app.listen(8080, function() {console.log("I'm listening.");});
