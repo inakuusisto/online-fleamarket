@@ -4,7 +4,10 @@ const bodyParser = require('body-parser');
 const cookieParser = require("cookie-parser");
 const cookieSession = require('cookie-session');
 const functions = require('./models/models.js');
-
+const multer = require('multer');
+const uidSafe = require('uid-safe');
+const path = require('path');
+const awsS3Url = "https://s3.amazonaws.com/inasfleamarket";
 
 
 //      SETUP
@@ -28,6 +31,25 @@ app.use(cookieSession({
 
 
 app.use(express.static(__dirname + '/public/'));
+
+
+var diskStorage = multer.diskStorage({
+    destination: function (req, file, callback) {
+        callback(null, __dirname + '/uploads');
+    },
+    filename: function (req, file, callback) {
+        uidSafe(24).then(function(uid) {
+            callback(null, uid + path.extname(file.originalname));
+        });
+    }
+});
+
+var uploader = multer({
+    storage: diskStorage,
+    limits: {
+        filesize: 2097152
+    }
+});
 
 
 
@@ -106,6 +128,24 @@ app.get('/profile', function(req, res) {
     }).catch(function(err) {
         console.log(err);
     });
+});
+
+
+app.post('/upload', uploader.single('file'), function(req, res) {
+
+    if (req.file) {
+        functions.sendFile(req.file).then(function() {
+            res.json({
+                success: true,
+                fileName: req.file.filename
+            });
+            functions.addImgToDb(req.file.filename, req.body.userId);
+        }).catch(function(err){
+            res.status(500).json({ err: 'Failure'});
+        });
+    } else {
+        res.status(500).json({ err: 'Failure'});
+    }
 });
 
 

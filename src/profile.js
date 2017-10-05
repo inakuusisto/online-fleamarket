@@ -1,6 +1,7 @@
 import React from 'react';
 import { LoggedInNavBar } from './loggedInHome';
 import axios from 'axios';
+const awsS3Url = "https://s3.amazonaws.com/inasfleamarket";
 
 export default class Profile extends React.Component {
     constructor(props){
@@ -20,7 +21,8 @@ export default class Profile extends React.Component {
         axios.get('/profile').then(({data}) => {
             this.setState({
                 userName: data.username,
-                profilePicUrl: data.image ? data.image : '../images/profile.png'
+                userId: data.id,
+                profilePicUrl: data.image ? awsS3Url + '/' + data.image : '../images/profile.png'
             })
         })
     }
@@ -31,9 +33,36 @@ export default class Profile extends React.Component {
     }
 
 
-    submit() {
-        alert('submit');
-    }
+    submit(e) {
+
+        // console.log(this.state.userId);
+        // console.log(e.target.files[0]);
+
+        var userId = this.state.userId;
+        var file = e.target.files[0];
+
+        var formData = new FormData();
+
+        formData.append('file', file);
+        formData.append('userId', userId);
+
+        axios({
+            method: 'post',
+            url: '/upload',
+            data: formData
+        }).then(({data}) => {
+            // console.log(data.fileName);
+            if(data.success) {
+                this.setState({
+                    uploadVisible: false,
+                    profilePicUrl: awsS3Url + '/' + data.fileName
+                })
+            }
+        }).catch(function(err) {
+            console.log(err);
+        })
+    };
+
 
     hidePicUpload() {
         this.setState({uploadVisible: false})
