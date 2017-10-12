@@ -17,8 +17,6 @@ export default class LoggedInHome extends React.Component {
 }
 
 
-
-
 export function LoggedInNavBar() {
     return (
         <div id='nav-container'>

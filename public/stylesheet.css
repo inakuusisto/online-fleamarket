@@ -162,3 +162,20 @@ li a {
     cursor: pointer;
     opacity: 0;
 }
+
+#item-upload-container {
+    background-color: white;
+    margin-top: 100px;
+    padding: 50px;
+    margin-left: 300px;
+    margin-right: 300px;
+}
+
+#item-upload-camera {
+    width: 100px;
+    height: 100px;
+}
+
+#item-upload-input {
+    display: none;
+}
