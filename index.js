@@ -122,16 +122,16 @@ app.post('/login', function(req, res) {
 
 
 
-app.get('/profile', function(req, res) {
+app.get('/user', function(req, res) {
     functions.getUserData(req.session.user.email).then(function(results) {
-        res.json(results.rows[0]);
+        res.json({user: results.rows[0]});
     }).catch(function(err) {
         console.log(err);
     });
 });
 
 
-app.post('/upload', uploader.single('file'), function(req, res) {
+app.post('/updateProfilePic', uploader.single('file'), function(req, res) {
 
     if (req.file) {
         functions.sendFile(req.file).then(function() {
@@ -140,6 +140,24 @@ app.post('/upload', uploader.single('file'), function(req, res) {
                 fileName: req.file.filename
             });
             functions.addImgToDb(req.file.filename, req.body.userId);
+        }).catch(function(err){
+            res.status(500).json({ err: 'Failure'});
+        });
+    } else {
+        res.status(500).json({ err: 'Failure'});
+    }
+});
+
+
+app.post('/uploadItemPic', uploader.single('file'), function(req, res) {
+
+    if (req.file) {
+        functions.sendFile(req.file).then(function() {
+            res.json({
+                success: true,
+                fileName: req.file.filename
+            });
+            functions.addImgToItemsDb(req.file.filename, req.body.userId);
         }).catch(function(err){
             res.status(500).json({ err: 'Failure'});
         });

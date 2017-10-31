@@ -77,10 +77,10 @@ function sendFile(file) {
         s3Request.on('response', (s3Response) => {
 
             if (s3Response.statusCode == 200) {
-                // console.log('jee');
+                console.log('jee');
                 resolve();
             } else {
-                // console.log('noouuu!');
+                console.log('noouuu!');
                 reject();
             }
         });
@@ -97,6 +97,15 @@ function addImgToDb(image, id) {
 }
 
 
+function addImgToItemsDb(image, id) {
+    return new Promise (function(resolve, reject) {
+        db.query ('INSERT INTO items(image, user_id) values($1, $2)',[image, id]);
+    }).catch(function(err) {
+        console.log(err);
+    });
+}
+
+
 
 module.exports.hashPassword = hashPassword;
 module.exports.addUserData = addUserData;
@@ -104,3 +113,4 @@ module.exports.getUserData = getUserData;
 module.exports.checkPassword = checkPassword;
 module.exports.sendFile = sendFile;
 module.exports.addImgToDb = addImgToDb;
+module.exports.addImgToItemsDb = addImgToItemsDb;

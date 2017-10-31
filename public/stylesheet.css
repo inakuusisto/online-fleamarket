@@ -166,16 +166,29 @@ li a {
 #item-upload-container {
     background-color: white;
     margin-top: 100px;
-    padding: 50px;
-    margin-left: 300px;
-    margin-right: 300px;
+    padding: 40px 20px;
+    margin-left: 400px;
+    margin-right: 400px;
 }
 
 #item-upload-camera {
-    width: 100px;
-    height: 100px;
+    width: 150px;
+    height: 130px;
+    display: block;
+    margin: auto;
+}
+
+#item-pic-upload-text {
+    text-align: center;
 }
 
 #item-upload-input {
     display: none;
+}
+
+#uploaded-item-pic {
+    width: 200px;
+    height: 200px;
+    display: block;
+    margin: auto;
 }

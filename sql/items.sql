@@ -4,8 +4,8 @@ CREATE TABLE items (
     id SERIAL primary key,
     user_id INTEGER NOT NULL,
     image VARCHAR(300),
-    title TEXT NOT NULL,
-    price INTEGER NOT NULL,
-    description TEXT NOT NULL,
+    title TEXT,
+    price INTEGER,
+    description TEXT,
     timestamp TIMESTAMP DEFAULT NOW()
 );

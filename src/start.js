@@ -2,12 +2,22 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Welcome from './welcome';
 import { Router, Route, IndexRoute, Link, hashHistory, browserHistory } from 'react-router';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import reduxPromise from 'redux-promise';
 import Register from './register';
+import reducer from './reducers';
 import Login from './login';
 import Home from './home';
 import LoggedInHome from './loggedInHome';
 import AddNewItem from './addNewItem';
 import Profile from './profile';
+import App from './app';
+
+
+const store = createStore(reducer, applyMiddleware(reduxPromise));
+
+// store.subscribe(() => console.log(store.getState()));
 
 
 if (location.pathname == '/home') {
@@ -25,11 +35,15 @@ if (location.pathname == '/home') {
 } else {
 
     const router = (
-        <Router history={browserHistory}>
-            <Route path='/' component={LoggedInHome} />
-            <Route path='/profile' component={Profile} />
-            <Route path='/newItem' component={AddNewItem} />
-        </Router>
+        <Provider store={store}>
+            <Router history={browserHistory}>
+                <Route path="/" component={App}>
+                    <IndexRoute component={LoggedInHome} />
+                    <Route path='/profile' component={Profile} />
+                    <Route path='/newItem' component={AddNewItem} />
+                </Route>
+            </Router>
+        </Provider>
     );
 
     ReactDOM.render(router, document.querySelector('main'));

@@ -1,30 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router';
+import { connect } from 'react-redux';
 
 export default class LoggedInHome extends React.Component {
-    constructor(props) {
-        super(props);
-    }
+
 
     render() {
 
-        return(
+        return (
             <div>
-            <LoggedInNavBar />
+                hello
             </div>
         )
     }
-}
 
-
-export function LoggedInNavBar() {
-    return (
-        <div id='nav-container'>
-            <h2 id='nav-header'>ClothesCircle</h2>
-            <ul id='nav-ul'>
-                <li><Link to='/profile'>Profile</Link></li>
-                <li><Link to='/newItem'>Add a new item</Link></li>
-            </ul>
-        </div>
-    );
 }
