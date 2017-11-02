@@ -97,9 +97,9 @@ function addImgToDb(image, id) {
 }
 
 
-function addImgToItemsDb(image, id) {
+function addNewItemToDb(image, id, title, price, description) {
     return new Promise (function(resolve, reject) {
-        db.query ('INSERT INTO items(image, user_id) values($1, $2)',[image, id]);
+        db.query ('INSERT INTO items(image, user_id, title, price, description) values($1, $2, $3, $4, $5)',[image, id, title, price, description]);
     }).catch(function(err) {
         console.log(err);
     });
@@ -113,4 +113,4 @@ module.exports.getUserData = getUserData;
 module.exports.checkPassword = checkPassword;
 module.exports.sendFile = sendFile;
 module.exports.addImgToDb = addImgToDb;
-module.exports.addImgToItemsDb = addImgToItemsDb;
+module.exports.addNewItemToDb = addNewItemToDb;

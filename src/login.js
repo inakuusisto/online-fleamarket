@@ -28,15 +28,11 @@ export default class Login extends React.Component {
 
         e.preventDefault();
 
-        // console.log(this.state.email);
-        // console.log(this.state.password);
-
         axios.post('/login', {
             email: this.state.email,
             password: this.state.password
         }).then(({data}) => {
             if(data.success) {
-                // console.log(data);
                 location.replace('/')
             } else {
                 this.setState({

@@ -24,9 +24,14 @@ export default function(state = {}, action) {
         });
         return Object.assign({}, state, { user });
     }
-    if (action.type == 'UPLOAD_ITEM_PIC') {
+    if (action.type == 'UPLOAD_NEW_ITEM') {
         state = Object.assign({}, state, {
-            uploadedItemPic: action.uploadedItemPic
+            showThankYouMessage: true
+        });
+    }
+    if (action.type == 'HIDE_THANK_YOU_MESSAGE') {
+        state = Object.assign({}, state, {
+            showThankYouMessage: false
         });
     }
 

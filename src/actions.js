@@ -34,15 +34,23 @@ export function updateProfilePic(formData) {
     });
 }
 
-export function uploadItemPic(formData) {
+
+export function uploadNewItem(formData) {
     return axios({
         method: 'post',
-        url: '/uploadItemPic',
+        url: '/uploadNewItem',
         data: formData
     }).then( ({data}) => {
-        return {
-            type: 'UPLOAD_ITEM_PIC',
-            uploadedItemPic: data.fileName
-        };
+        if(data.success) {
+            return {
+                type: 'UPLOAD_NEW_ITEM'
+            };
+        }
     });
+}
+
+export function hideThankYouMessage() {
+    return {
+        type: 'HIDE_THANK_YOU_MESSAGE'
+    };
 }

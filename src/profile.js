@@ -1,7 +1,6 @@
 import React from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { LoggedInNavBar } from './loggedInHome';
 import { showProfilePicloader, updateProfilePic, hideProfilePicUploader } from './actions';
 const awsS3Url = "https://s3.amazonaws.com/inasfleamarket";
 
@@ -11,6 +10,13 @@ class Profile extends React.Component {
 
         this.showProfilePicloader = this.showProfilePicloader.bind(this);
         this.hideProfilePicUploader = this.hideProfilePicUploader.bind(this);
+    }
+
+    componentWillUnmount() {
+
+        if(this.props.profilePicUploadVisible) {
+            this.props.dispatch(hideProfilePicUploader());
+        }
     }
 
     showProfilePicloader() {

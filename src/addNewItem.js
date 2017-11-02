@@ -1,30 +1,78 @@
 import React from 'react';
 import { LoggedInNavBar } from './loggedInHome';
 import { connect } from 'react-redux';
-import { uploadItemPic } from './actions';
-const awsS3Url = "https://s3.amazonaws.com/inasfleamarket";
+import { uploadNewItem, hideThankYouMessage } from './actions';
 
 
 class AddNewItem extends React.Component {
     constructor() {
         super();
+        this.state = {
+            imageFile: '',
+            imagePreviewUrl: '',
+            title: '',
+            price: '',
+            description: ''
+        }
 
-        this.uploadItemPic = this.uploadItemPic.bind(this);
+        this.handleInputChange = this.handleInputChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    uploadItemPic(e) {
+    componentWillUnmount() {
+
+        if(this.props.showThankYouMessage) {
+            this.props.dispatch(hideThankYouMessage());
+        }
+    }
+
+
+    handleImageChange(e) {
+
+        var file = e.target.files[0];
+        let reader = new FileReader();
+
+        reader.onloadend = () => {
+            this.setState({
+                imageFile: file,
+                imagePreviewUrl: reader.result
+            });
+        }
+
+        reader.readAsDataURL(file)
+  }
+
+
+    handleInputChange(e) {
+        const value = e.target.value;
+        const name = e.target.name;
+
+        this.setState({
+            [name]: value
+        })
+    }
+
+    handleSubmit(e) {
+
+        e.preventDefault();
 
         var userId = this.props.user.id;
-        var file = e.target.files[0];
+        var title = this.state.title;
+        var price = this.state.price;
+        var description = this.state.description;
+        var imageFile = this.state.imageFile;
 
         var formData = new FormData();
 
-        formData.append('file', file);
+        formData.append('file', imageFile);
         formData.append('userId', userId);
+        formData.append('title', title);
+        formData.append('price', price);
+        formData.append('description', description);
 
-        this.props.dispatch(uploadItemPic(formData));
-
+        this.props.dispatch(uploadNewItem(formData));
     }
+
 
     render() {
 
@@ -37,12 +85,15 @@ class AddNewItem extends React.Component {
 
 
         return(
-            <div>
-                {this.props.uploadedItemPic ?
-                    <div id='item-upload-container'>
-                        <img id='uploaded-item-pic' src={awsS3Url + '/' + this.props.uploadedItemPic} />
-                    </div>
-                    : <ItemPicUpload submit={(e) => this.uploadItemPic(e)} />}
+            <div id='add-new-item-container'>
+                {this.props.showThankYouMessage ?
+                     <ThankYouMessage />
+                 : this.state.imagePreviewUrl ?
+                     <div id='item-upload-container'>
+                         <img id='uploaded-item-pic' src={this.state.imagePreviewUrl} />
+                     </div>
+                     : <ItemPicUpload handleImageChange={(e) => this.handleImageChange(e)} />}
+                 {this.props.showThankYouMessage || <AddNewItemForm title={this.state.title} price={this.state.price} description={this.state.description} handleInputChange={this.handleInputChange} handleSubmit={this.handleSubmit} />}
             </div>
         );
     }
@@ -52,11 +103,12 @@ class AddNewItem extends React.Component {
 const mapStateToProps = function(state) {
     return {
         user: state.user,
-        uploadedItemPic: state.uploadedItemPic
+        showThankYouMessage: state.showThankYouMessage
     }
 }
 
 export default connect(mapStateToProps)(AddNewItem);
+
 
 
 function ItemPicUpload(props) {
@@ -66,9 +118,30 @@ function ItemPicUpload(props) {
                 <label htmlFor='item-upload-input'>
                     <img src="../images/camera.png" id='item-upload-camera' />
                 </label>
-                <input type="file" id="item-upload-input" onChange={props.submit} />
+                <input type="file" id="item-upload-input" onChange={props.handleImageChange} />
             </div>
             <p id='item-pic-upload-text'>Select a picture</p>
+        </div>
+    )
+}
+
+
+function AddNewItemForm(props) {
+    return (
+        <form onSubmit={props.handleSubmit}>
+            <input className='add-item-input' type='text' name='title' placeholder='Title' value={props.title} onChange={props.handleInputChange} required /><br />
+            <input className='add-item-input' type='number' min="0" step="1" name='price' placeholder='Price €' value={props.price} onChange={props.handleInputChange} required /><br />
+            <input className='add-item-input' type='text' name='description' placeholder='Description' value={props.description} onChange={props.handleInputChange} required /><br />
+            <input className='add-item-button' type='submit' value='Submit' />
+        </form>
+    )
+}
+
+
+function ThankYouMessage() {
+    return (
+        <div id='thank-you-container'>
+            <p> Thank you for your post!</p>
         </div>
     )
 }

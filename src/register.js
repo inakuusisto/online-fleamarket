@@ -55,14 +55,21 @@ export default class Register extends React.Component {
         return (
             <div id='reg-container'>
                 {this.state.error && <p className="error-message">Oops, something went wrong. Please try again!</p>}
-                <form onSubmit={this.handleSubmit}>
-                    <input className='reg-input' type='text' name='userName' placeholder='Username' value={this.state.userName} onChange={this.handleInputChange} /><br />
-                    <input className='reg-input' type='email' name='email' placeholder='Email' value={this.state.email} onChange={this.handleInputChange} /><br />
-                    <input className='reg-input' type='password' name='password' placeholder='Password' value={this.state.password} onChange={this.handleInputChange} /><br />
-                    <input className='reg-button' type='submit' value='Submit' />
-                </form>
+                <RegistrationForm handleSubmit={this.handleSubmit} userName={this.state.userName} email={this.state.email} password={this.state.password} handleInputChange={this.handleInputChange} />
                 <p>If you already have an account, please <Link to='/login'>Login</Link></p>
             </div>
         )
     }
+}
+
+
+function RegistrationForm() {
+    return (
+        <form onSubmit={props.handleSubmit}>
+            <input className='reg-input' type='text' name='userName' placeholder='Username' value={props.userName} onChange={props.handleInputChange} required /><br />
+            <input className='reg-input' type='email' name='email' placeholder='Email' value={props.email} onChange={props.handleInputChange} required /><br />
+            <input className='reg-input' type='password' name='password' placeholder='Password' value={props.password} onChange={props.handleInputChange} required /><br />
+            <input className='reg-button' type='submit' value='Submit' />
+        </form>
+    )
 }

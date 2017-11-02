@@ -149,7 +149,7 @@ app.post('/updateProfilePic', uploader.single('file'), function(req, res) {
 });
 
 
-app.post('/uploadItemPic', uploader.single('file'), function(req, res) {
+app.post('/uploadNewItem', uploader.single('file'), function(req, res) {
 
     if (req.file) {
         functions.sendFile(req.file).then(function() {
@@ -157,7 +157,7 @@ app.post('/uploadItemPic', uploader.single('file'), function(req, res) {
                 success: true,
                 fileName: req.file.filename
             });
-            functions.addImgToItemsDb(req.file.filename, req.body.userId);
+            functions.addNewItemToDb(req.file.filename, req.body.userId, req.body.title, req.body.price, req.body.description);
         }).catch(function(err){
             res.status(500).json({ err: 'Failure'});
         });

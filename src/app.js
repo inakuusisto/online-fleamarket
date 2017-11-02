@@ -16,9 +16,7 @@ class App extends React.Component {
         if(!this.props.user) {
             return null;
         }
-
-        // console.log(this.props.user);
-
+        
         return (
             <div>
                 <LoggedInNavBar />
@@ -44,6 +42,7 @@ export function LoggedInNavBar() {
         <div id='nav-container'>
             <h2 id='nav-header'>ClothesCircle</h2>
             <ul id='nav-ul'>
+                <li><Link to='/'>My feed</Link></li>
                 <li><Link to='/profile'>Profile</Link></li>
                 <li><Link to='/newItem'>Add a new item</Link></li>
             </ul>
