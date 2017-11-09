@@ -103,12 +103,12 @@ li a {
 #profile-big-img {
     width: 300px;
     height: 320px;
-    margin-left: 540px;
+    margin-left: 60px;
     margin-top: 50px;
 }
 
 #profile-username {
-    margin-left: 640px;
+    margin-left: 130px;
     font-size: 35px;
     margin-top: 20px;
 }
@@ -119,8 +119,8 @@ li a {
     height: 150px;
     border-radius: 5px;
     position: absolute;
-    left: 900px;
-    top: 200px;
+    left: 30px;
+    top: 500px;
     border-color: black;
     display: flex;
     flex-direction: column;
@@ -161,6 +161,41 @@ li a {
     font-size: 20px;
     cursor: pointer;
     opacity: 0;
+}
+
+#profile-items-container {
+    position: absolute;
+    left: 340px;
+    top: 80px;
+    margin-left: 50px;
+}
+
+.profile-item-container {
+    background-color: white;
+    width: 280px;
+    height: 340px;
+    margin-bottom: 20px;
+    padding: 25px;
+    margin-left: 20px;
+    float: left;
+}
+
+.profile-item-image {
+    width: 150px;
+    height: 170px;
+    display: block;
+    margin: auto;
+}
+
+.profile-item-title {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+
+.profile-item-description {
+    margin-bottom: 10px;
+    margin-top: 10px;
 }
 
 #add-new-item-container {

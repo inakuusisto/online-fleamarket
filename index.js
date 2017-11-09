@@ -166,6 +166,19 @@ app.post('/uploadNewItem', uploader.single('file'), function(req, res) {
     }
 });
 
+app.get('/ownItems', function(req, res) {
+    functions.getOwnItems(req.session.user.userId).then(function(results) {
+        for(var i=0; i<results.rows.length; i++) {
+            if(results.rows[i].image) {
+                results.rows[i].image = awsS3Url + '/' + results.rows[i].image;
+            }
+        }
+        res.json({ownItems: results.rows});
+    }).catch(function(error) {
+        console.log(error);
+    });
+});
+
 
 app.get('*', function(req, res) {
     if(!req.session.user) {

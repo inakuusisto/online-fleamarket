@@ -105,6 +105,9 @@ function addNewItemToDb(image, id, title, price, description) {
     });
 }
 
+function getOwnItems(userId) {
+    return db.query('SELECT * FROM items WHERE user_id=$1', [userId]);
+}
 
 
 module.exports.hashPassword = hashPassword;
@@ -114,3 +117,4 @@ module.exports.checkPassword = checkPassword;
 module.exports.sendFile = sendFile;
 module.exports.addImgToDb = addImgToDb;
 module.exports.addNewItemToDb = addNewItemToDb;
+module.exports.getOwnItems = getOwnItems;

@@ -54,3 +54,12 @@ export function hideThankYouMessage() {
         type: 'HIDE_THANK_YOU_MESSAGE'
     };
 }
+
+export function receiveOwnItemsData() {
+    return axios.get('/ownItems').then( ({data}) => {
+        return {
+            type: 'RECEIVE_OWN_ITEMS_DATA',
+            ownItems: data.ownItems
+        };
+    });
+}

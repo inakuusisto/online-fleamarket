@@ -34,6 +34,11 @@ export default function(state = {}, action) {
             showThankYouMessage: false
         });
     }
+    if (action.type == 'RECEIVE_OWN_ITEMS_DATA') {
+        state = Object.assign({}, state, {
+            ownItems: action.ownItems
+        });
+    }
 
     return state;
 }
