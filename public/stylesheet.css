@@ -173,7 +173,7 @@ li a {
 .profile-item-container {
     background-color: white;
     width: 280px;
-    height: 340px;
+    min-height: 380px;
     margin-bottom: 20px;
     padding: 25px;
     margin-left: 20px;
@@ -196,6 +196,29 @@ li a {
 .profile-item-description {
     margin-bottom: 10px;
     margin-top: 10px;
+}
+
+.profile-item-delete {
+    margin-left: 80px;
+    text-decoration: underline;
+    margin-top: 45px;
+    cursor: pointer;
+}
+
+#profile-delete-modal {
+    position: fixed;
+    top: 30%;
+    left: 50%;
+    width: 360px;
+    height: 200px;
+    padding-top: 80px;
+    margin-left: -150px;
+    margin-top: -100px;
+    background-color: white;
+    text-align: center;
+    z-index: 10;
+    outline: 9999px solid rgba(0,0,0,0.5);
+    color: red;
 }
 
 #add-new-item-container {

@@ -63,3 +63,10 @@ export function receiveOwnItemsData() {
         };
     });
 }
+
+export function showDeleteConfirmation(itemToDelete) {
+    return {
+        type: 'SHOW_DELETE_CONFIRMATION',
+        itemToDelete: itemToDelete
+    };
+}

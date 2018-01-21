@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { showProfilePicloader, updateProfilePic, hideProfilePicUploader, receiveOwnItemsData } from './actions';
+import { showProfilePicloader, updateProfilePic, hideProfilePicUploader, receiveOwnItemsData, showDeleteConfirmation } from './actions';
 const awsS3Url = "https://s3.amazonaws.com/inasfleamarket";
 
 class Profile extends React.Component {
@@ -46,6 +46,13 @@ class Profile extends React.Component {
     }
 
 
+    startDelete(item) {
+
+        // console.log(item);
+        this.props.dispatch(showDeleteConfirmation(item.id));
+    }
+
+
     render() {
 
         if(!this.props.user || !this.props.ownItems) {
@@ -62,6 +69,7 @@ class Profile extends React.Component {
                         <p className='profile-item-title'>{item.title}</p>
                         <p>{item.price + ' €'}</p>
                         <p className='profile-item-description'>{item.description}</p>
+                        <p className='profile-item-delete' onClick={this.startDelete.bind(this, item)}>Delete item</p>
                     </div>
                 )}
             </div>
@@ -73,6 +81,7 @@ class Profile extends React.Component {
                 <p id='profile-username'>{this.props.user.username}</p>
                 {this.props.profilePicUploadVisible && <ProfilePicUpload hideProfilePicUploader={this.hideProfilePicUploader} submit={(e) => this.updateProfilePic(e)} />}
                 {ownItems}
+                {this.props.deleteConfirmationVisible && <DeleteItemModal />}
             </div>
         )
     }
@@ -83,7 +92,9 @@ const mapStateToProps = function(state) {
     return {
         user: state.user,
         profilePicUploadVisible: state.profilePicUploadVisible,
-        ownItems: state.ownItems
+        ownItems: state.ownItems,
+        deleteConfirmationVisible: state.deleteConfirmationVisible,
+        itemToDelete: state.itemToDelete
     }
 }
 
@@ -99,6 +110,14 @@ function ProfilePicUpload(props) {
                 <span>Upload</span>
                 <input type="file" id="pic-upload-button" onChange={props.submit} />
             </div>
+        </div>
+    )
+}
+
+function DeleteItemModal(props) {
+    return(
+        <div id='profile-delete-modal'>
+            <p>Are you sure you want to delete the following item?</p>
         </div>
     )
 }

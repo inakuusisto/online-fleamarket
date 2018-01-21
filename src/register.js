@@ -63,7 +63,7 @@ export default class Register extends React.Component {
 }
 
 
-function RegistrationForm() {
+function RegistrationForm(props) {
     return (
         <form onSubmit={props.handleSubmit}>
             <input className='reg-input' type='text' name='userName' placeholder='Username' value={props.userName} onChange={props.handleInputChange} required /><br />

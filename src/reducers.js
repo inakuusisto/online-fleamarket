@@ -36,7 +36,13 @@ export default function(state = {}, action) {
     }
     if (action.type == 'RECEIVE_OWN_ITEMS_DATA') {
         state = Object.assign({}, state, {
-            ownItems: action.ownItems
+            ownItems: action.ownItems.reverse()
+        });
+    }
+    if (action.type == 'SHOW_DELETE_CONFIRMATION') {
+        state = Object.assign({}, state, {
+            deleteConfirmationVisible: true,
+            itemToDelete: action.itemToDelete
         });
     }
 
