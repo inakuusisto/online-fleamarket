@@ -131,6 +131,15 @@ app.get('/user', function(req, res) {
 });
 
 
+app.get('/feedItems', function(req, res) {
+    functions.getFeedItems().then(function(results) {
+        res.json({feedItems: results.rows});
+    }).catch(function(err) {
+        console.log(err);
+    });
+});
+
+
 app.post('/updateProfilePic', uploader.single('file'), function(req, res) {
 
     if (req.file) {
@@ -176,6 +185,18 @@ app.get('/ownItems', function(req, res) {
         res.json({ownItems: results.rows});
     }).catch(function(error) {
         console.log(error);
+    });
+});
+
+
+app.post('/deleteItem', function(req, res) {
+    // console.log(req.body.itemToDelete);
+    functions.deleteItem(req.body.itemToDelete).then(function() {
+        res.json({
+            success: true
+        });
+    }).catch(function(err) {
+        console.log(err);
     });
 });
 

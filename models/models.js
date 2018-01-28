@@ -48,6 +48,10 @@ function getUserData(email) {
     return db.query('SELECT * FROM users WHERE email=$1', [email]);
 }
 
+function getFeedItems() {
+    return db.query('SELECT * FROM items');
+}
+
 
 function checkPassword(textEnteredInLoginForm, hashedPasswordFromDatabase) {
     return new Promise(function(resolve, reject) {
@@ -109,6 +113,10 @@ function getOwnItems(userId) {
     return db.query('SELECT * FROM items WHERE user_id=$1', [userId]);
 }
 
+function deleteItem(itemId) {
+    return db.query('DELETE FROM items WHERE id=$1', [itemId]);
+}
+
 
 module.exports.hashPassword = hashPassword;
 module.exports.addUserData = addUserData;
@@ -118,3 +126,5 @@ module.exports.sendFile = sendFile;
 module.exports.addImgToDb = addImgToDb;
 module.exports.addNewItemToDb = addNewItemToDb;
 module.exports.getOwnItems = getOwnItems;
+module.exports.deleteItem = deleteItem;
+module.exports.getFeedItems = getFeedItems;

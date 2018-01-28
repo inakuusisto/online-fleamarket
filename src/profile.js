@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { showProfilePicloader, updateProfilePic, hideProfilePicUploader, receiveOwnItemsData, showDeleteConfirmation } from './actions';
+import { showProfilePicloader, updateProfilePic, hideProfilePicUploader, receiveOwnItemsData, showDeleteConfirmation, closeModal, deleteItem } from './actions';
 const awsS3Url = "https://s3.amazonaws.com/inasfleamarket";
 
 class Profile extends React.Component {
@@ -10,6 +10,8 @@ class Profile extends React.Component {
 
         this.showProfilePicloader = this.showProfilePicloader.bind(this);
         this.hideProfilePicUploader = this.hideProfilePicUploader.bind(this);
+        this.closeModal = this.closeModal.bind(this);
+        this.deleteItem = this.deleteItem.bind(this);
     }
 
 
@@ -52,6 +54,14 @@ class Profile extends React.Component {
         this.props.dispatch(showDeleteConfirmation(item.id));
     }
 
+    closeModal() {
+        this.props.dispatch(closeModal());
+    }
+
+    deleteItem() {
+        this.props.dispatch(deleteItem(this.props.itemToDelete));
+    }
+
 
     render() {
 
@@ -81,7 +91,7 @@ class Profile extends React.Component {
                 <p id='profile-username'>{this.props.user.username}</p>
                 {this.props.profilePicUploadVisible && <ProfilePicUpload hideProfilePicUploader={this.hideProfilePicUploader} submit={(e) => this.updateProfilePic(e)} />}
                 {ownItems}
-                {this.props.deleteConfirmationVisible && <DeleteItemModal />}
+                {this.props.deleteConfirmationVisible && <DeleteItemModal closeModal={this.closeModal} deleteItem={this.deleteItem} />}
             </div>
         )
     }
@@ -117,7 +127,9 @@ function ProfilePicUpload(props) {
 function DeleteItemModal(props) {
     return(
         <div id='profile-delete-modal'>
-            <p>Are you sure you want to delete the following item?</p>
+            <p id='profile-close-modal' onClick={props.closeModal}>X</p>
+            <p id='profile-modal-text'>Are you sure you want to delete the following item?</p>
+            <p id='profil-modal-yes' onClick={props.deleteItem}>Yes</p>
         </div>
     )
 }

@@ -211,7 +211,7 @@ li a {
     left: 50%;
     width: 360px;
     height: 200px;
-    padding-top: 80px;
+    /*padding-top: 80px;*/
     margin-left: -150px;
     margin-top: -100px;
     background-color: white;
@@ -219,6 +219,22 @@ li a {
     z-index: 10;
     outline: 9999px solid rgba(0,0,0,0.5);
     color: red;
+}
+
+#profile-close-modal {
+    margin-top: 25px;
+    margin-left: 280px;
+    color: black;
+    cursor: pointer;
+}
+
+#profile-modal-text {
+    margin-top: 40px;
+}
+
+#profil-modal-yes {
+    margin-top: 40px;
+    cursor: pointer;
 }
 
 #add-new-item-container {

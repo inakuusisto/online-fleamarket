@@ -16,7 +16,7 @@ class App extends React.Component {
         if(!this.props.user) {
             return null;
         }
-        
+
         return (
             <div>
                 <LoggedInNavBar />

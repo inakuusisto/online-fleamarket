@@ -5,6 +5,11 @@ export default function(state = {}, action) {
             user: action.user
         });
     }
+    if (action.type == 'RECEIVE_FEED_ITEMS') {
+        state = Object.assign({}, state, {
+            feedItems: action.feedItems
+        });
+    }
     if (action.type == 'SHOW_PROFILE_PIC_UPLOADER') {
         state = Object.assign({}, state, {
             profilePicUploadVisible: true
@@ -45,6 +50,16 @@ export default function(state = {}, action) {
             itemToDelete: action.itemToDelete
         });
     }
-
+    if (action.type == 'CLOSE_MODAL') {
+        state = Object.assign({}, state, {
+            deleteConfirmationVisible: false
+        });
+    }
+    if (action.type == 'DELETE_ITEM') {
+        state = Object.assign({}, state, {
+            deleteConfirmationVisible: false,
+            ownItems: state.ownItems.filter(item => item.id != action.itemId)
+        });
+    }
     return state;
 }

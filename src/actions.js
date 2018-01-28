@@ -9,6 +9,15 @@ export function receiveUserData() {
     });
 }
 
+export function receiveFeedItems() {
+    return axios.get('/feedItems').then( ({data}) => {
+        return {
+            type: 'RECEIVE_FEED_ITEMS',
+            feedItems: data.feedItems
+        };
+    });
+}
+
 export function showProfilePicloader() {
     return {
         type: 'SHOW_PROFILE_PIC_UPLOADER'
@@ -69,4 +78,19 @@ export function showDeleteConfirmation(itemToDelete) {
         type: 'SHOW_DELETE_CONFIRMATION',
         itemToDelete: itemToDelete
     };
+}
+
+export function closeModal() {
+    return {
+        type: 'CLOSE_MODAL'
+    };
+}
+
+export function deleteItem(itemId) {
+    return axios.post('/deleteItem', {itemToDelete: itemId}).then(function() {
+        return {
+            type: 'DELETE_ITEM',
+            itemId
+        };
+    });
 }

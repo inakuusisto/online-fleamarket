@@ -33,6 +33,7 @@ export default class Login extends React.Component {
             password: this.state.password
         }).then(({data}) => {
             if(data.success) {
+                // console.log(data);
                 location.replace('/')
             } else {
                 this.setState({
