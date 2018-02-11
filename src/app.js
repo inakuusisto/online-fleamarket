@@ -45,6 +45,7 @@ export function LoggedInNavBar() {
                 <li><Link to='/'>My feed</Link></li>
                 <li><Link to='/profile'>Profile</Link></li>
                 <li><Link to='/newItem'>Add a new item</Link></li>
+                <li><a href='/logout'>Log out</a></li>
             </ul>
         </div>
     );

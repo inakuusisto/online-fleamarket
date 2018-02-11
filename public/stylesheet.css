@@ -9,30 +9,34 @@ body {
     color: #444444;
 }
 
-/*main {
-display: grid;
-grid-template-columns: repeat(3, 1fr);
-grid-gap: 10px;
-}*/
 
 #home-container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 10px;
-}
-
-
-#welcome-container {
-    grid-column: 2;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    background-image: linear-gradient(
+      rgba(0, 0, 0, 0.5),
+      rgba(0, 0, 0, 0.5)
+    ), url('./images/clothes2.jpg');
+    background-size: cover;
+    height: 500px;
     margin-top: 60px;
 }
 
+#welcome-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 200px;
+    color: white;
+}
+
 #welcome-text {
-    margin-top: 50px;
+    margin-top: 20px;
     margin-bottom: 15px;
+    font-size: 20px;
+}
+
+#register-link {
+    color: white;
+    margin-top: 30px;
 }
 
 #reg-container {
@@ -94,6 +98,34 @@ li {
 li a {
     text-decoration: none;
     color: #444444;
+}
+
+#loggedInHome-items-container {
+    margin-left: 80px;
+    margin-top: 80px;
+}
+
+.loggedInHome-item-container {
+    background-color: white;
+    padding: 30px;
+    width: 240px;
+    float: left;
+    margin-left: 40px;
+    margin-bottom: 40px;
+}
+
+.loggedInHome-image {
+    width: 180px;
+    height: 170px;
+}
+
+.loggedInHome-item-title {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+#clearing-div {
+    clear: both;
 }
 
 #profile-container {
@@ -166,7 +198,7 @@ li a {
 #profile-items-container {
     position: absolute;
     left: 340px;
-    top: 80px;
+    top: 50px;
     margin-left: 50px;
 }
 

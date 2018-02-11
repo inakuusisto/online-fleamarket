@@ -22,10 +22,15 @@ class LoggedInHome extends React.Component {
         console.log(this.props.feedItems);
 
         const feedItems = (
-            <div id='feed-items-container'>
+            <div id='loggedInHome-items-container'>
                 {this.props.feedItems.map((item) =>
-                    <img src={awsS3Url+'/'+item.image} alt='hello' />
+                    <div className='loggedInHome-item-container'>
+                        <img className='loggedInHome-image' src={awsS3Url + '/' + item.image} alt='hello' />
+                        <p className='loggedInHome-item-title'>{item.title}</p>
+                        <p>{item.price + ' €'}</p>
+                    </div>
                 )}
+                <div id='clearing-div'></div>
             </div>
         )
 

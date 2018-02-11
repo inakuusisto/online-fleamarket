@@ -7,7 +7,7 @@ export default function(state = {}, action) {
     }
     if (action.type == 'RECEIVE_FEED_ITEMS') {
         state = Object.assign({}, state, {
-            feedItems: action.feedItems
+            feedItems: action.feedItems.reverse()
         });
     }
     if (action.type == 'SHOW_PROFILE_PIC_UPLOADER') {
