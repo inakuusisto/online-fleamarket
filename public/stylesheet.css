@@ -55,10 +55,13 @@ body {
 }
 
 .reg-button {
-    margin-left: 65px;
+    margin-left: 27px;
     margin-bottom: 10px;
-    width: 70px;
-    height: 50px;
+    width: 150px;
+    height: 30px;
+    background-color: #CC6666;
+    border-radius: 5px;
+    color: white;
 }
 
 .error-message {
@@ -134,7 +137,7 @@ li a {
 
 #profile-big-img {
     width: 300px;
-    height: 320px;
+    height: 350px;
     margin-left: 60px;
     margin-top: 50px;
 }
@@ -151,12 +154,14 @@ li a {
     height: 150px;
     border-radius: 5px;
     position: absolute;
-    left: 30px;
-    top: 500px;
+    left: 600px;
+    top: 200px;
     border-color: black;
     display: flex;
     flex-direction: column;
     align-items: center;
+    z-index: 10;
+    outline: 9999px solid rgba(0,0,0,0.5);
 }
 
 #hide-pic-upload {
